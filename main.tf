@@ -1,4 +1,4 @@
-resource "digitalocean_droplet" "${var.name}" {
+resource "digitalocean_droplet" "__do" {
   image              = "ubuntu-18-10-x64"
   name               = "${var.name}"
   region             = "sgp1"
@@ -25,6 +25,10 @@ resource "digitalocean_droplet" "${var.name}" {
       "sudo apt-get update",
 
       "sudo apt-get -y install nginx",
+      "sudo ufw allow 'Nginx Full'",
+      "sudo apt-get -y install mysql-server",
+      "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash",
+      "sudo apt-get install -y nodejs"
     ]
   }
 }

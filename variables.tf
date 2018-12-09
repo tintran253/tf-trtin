@@ -2,6 +2,7 @@ variable "name" {
   default = "trtin"
 }
 
+variable "sql_password" {}
 variable "do_token" {}
 
 variable "pvt_key" {
@@ -22,23 +23,14 @@ variable "slack_hook_url" {
   default = ""
 }
 
-data "template_file" "elastic_yml" {
-  template = "${file("./configs/elastic/elasticsearch.yml")}"
-
-  vars {
-    elasticsearch_port = "${lookup(var.ports,"elasticsearch")}"
-    slack_hook_url     = "${var.slack_hook_url}"
-  }
-}
-
-data "template_file" "${var.name}" {
-  template = "${file("./configs/graylog/server.conf")}"
-
-  vars {
-    ip = "${digitalocean_droplet.graylog.ipv4_address}"
-  }
-}
-
 data "template_file" "nginx" {
   template = "${file("./configs/nginx/default")}"
+}
+
+data "template_file" "pw_cmd" {
+  template = "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$${sql_password}';"
+
+  vars {
+    sql_password = "${var.sql_password}"
+  }
 }
