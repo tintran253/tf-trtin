@@ -43,3 +43,6 @@ data "template_file" "prod_conf" {
     dbname       = "${var.name}"
   }
 }
+data "template_file" "mysql_conf" {
+  template = "${file("./configs/mysql/cfg.yml")}"
+}

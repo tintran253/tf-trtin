@@ -34,8 +34,7 @@ resource "digitalocean_droplet" "__do" {
       "cd tintt-gaubungbu",
       "npm i pm2 -g",
       "npm i",
-      "mysql -uroot --password=${var.sql_password} -Bse \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '${var.sql_password}';\"",
-      "mysql -uroot --password=${var.sql_password} -Bse 'CREATE DATABASE ${var.name};'",
+      
     ]
   }
 }
