@@ -14,20 +14,26 @@ resource "null_resource" "__do_action" {
     content     = "${data.template_file.nginx.rendered}"
     destination = "/etc/nginx/sites-available/default"
   }
+  provisioner "file" {
+    content     = "${data.template_file.prod_conf.rendered}"
+    destination = "/tmp/config.production.json"
+  }
 
   provisioner "remote-exec" {
     inline = [
-      "git clone https://github.com/tintran253/tintt-gaubungbu.git",
+      "sudo mv /tmp/config.production.json tintt-gaubungbu",
       "cd tintt-gaubungbu",
-      "npm i pm2 -g",
-      "npm i",
       "pm2 start ecosystem.config.js",
-
-      # "sudo /bin/systemctl daemon-reload",
-      # temporary disable nginx
-      "sudo systemctl stop nginx",
-
-      "sudo mysql -e ${data.template_file.pw_cmd.rendered}",
+      "sudo mysql -uroot -p${var.sql_password} ${var.name} < 'trtin.sql'",
+      "sudo systemctl start nginx",
     ]
+
+    # "sudo /bin/systemctl daemon-reload",
+    # temporary disable nginx
+
+    # => create database
+    # => exec password
+    # => pass prod conf
+    # "sudo mysql -e ${data.template_file.pw_cmd.rendered}",
   }
 }
