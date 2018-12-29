@@ -1,11 +1,11 @@
-resource "digitalocean_droplet" "__do" {
+resource "digitalocean_droplet" "main" {
   image              = "ubuntu-18-10-x64"
   name               = "${var.name}"
   region             = "sgp1"
   size               = "1gb"
   private_networking = false
   backups            = false
-  tags               = ["tritin-gbb"]
+  tags               = ["trtin-gbb"]
 
   ssh_keys = [
     "${var.ssh_fingerprint}",
@@ -34,7 +34,6 @@ resource "digitalocean_droplet" "__do" {
       "cd tintt-gaubungbu",
       "npm i pm2 -g",
       "npm i",
-      
     ]
   }
 }

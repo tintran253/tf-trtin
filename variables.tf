@@ -43,6 +43,20 @@ data "template_file" "prod_conf" {
     dbname       = "${var.name}"
   }
 }
+
 data "template_file" "mysql_conf" {
   template = "${file("./configs/mysql/cfg.yml")}"
+}
+
+variable "db_todo_name" {}
+
+data "template_file" "todo_env" {
+  template = "${file("./configs/todos/env")}"
+
+  vars {
+    sql_host     = "localhost"
+    sql_user     = "root"
+    sql_password = "${var.sql_password}"
+    sql_db_todo  = "${var.db_todo_name}"
+  }
 }

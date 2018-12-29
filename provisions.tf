@@ -1,12 +1,11 @@
-resource "null_resource" "__do_action" {
-  depends_on = ["digitalocean_droplet.__do"]
-
+resource "null_resource" "main-gaubungbu" {
+  depends_on = ["digitalocean_droplet.main"]
   connection {
-    host        = "${digitalocean_droplet.__do.ipv4_address}"
+    host        = "${digitalocean_droplet.main.ipv4_address}"
     user        = "root"
     type        = "ssh"
     private_key = "${file(var.pvt_key)}"
-    timeout     = "2m"
+    timeout     = "5m"
   }
 
   # put elastic config file

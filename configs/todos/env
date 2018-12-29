@@ -1,0 +1,6 @@
+PORT=3000
+DB_CLIENT=mysql
+DB_HOST=${sql_host}
+DB_USER=${sql_user}
+DB_PASSWORD='${sql_password}'
+DB='${sql_db_todo}'
