@@ -19,6 +19,7 @@ resource "null_resource" "main-todo" {
       "git clone https://github.com/tintran253/tintt-todo.git",
       "mv /tmp/.env tintt-todo",
       "cd tintt-todo",
+      "git pull",
       "npm i",
       "npm i env-cmd -g",
       "npm i knex -g",

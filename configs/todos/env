@@ -1,3 +1,4 @@
+ENV=prod
 PORT=3000
 DB_CLIENT=mysql
 DB_HOST=${sql_host}
