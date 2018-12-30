@@ -29,7 +29,7 @@ resource "null_resource" "main-gaubungbu" {
       "mysql -uroot -p${var.sql_password} -Bse \"UPDATE mysql.user SET host = '%' WHERE host = 'localhost' AND user = 'root';\"",
       "mysql -uroot -p${var.sql_password} -Bse \"UPDATE mysql.db SET host = '%' WHERE host = 'localhost' AND user = 'root';\"",
       "mysql -uroot -p${var.sql_password} -Bse \"FLUSH PRIVILEGES;\"",
-      "mysql -uroot -p${var.sql_password} -Bse 'CREATE DATABASE ${var.name};'",
+      "mysql -uroot -p${var.sql_password} -Bse 'CREATE DATABASE ${var.name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'",
       "sudo mv /tmp/config.production.json tintt-gaubungbu",
       "cd tintt-gaubungbu",
       "pm2 start ecosystem.config.js",

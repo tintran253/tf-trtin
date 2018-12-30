@@ -23,7 +23,7 @@ resource "null_resource" "main-todo" {
       "npm i",
       "npm i env-cmd -g",
       "npm i knex -g",
-      "mysql -uroot -p${var.sql_password} -Bse 'CREATE DATABASE ${var.db_todo_name};'",
+      "mysql -uroot -p${var.sql_password} -Bse 'CREATE DATABASE ${var.db_todo_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'",
       "npm run migrate",
       "pm2 start server.js",
       "sudo systemctl start nginx",
